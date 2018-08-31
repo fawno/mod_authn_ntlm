@@ -21,6 +21,6 @@ build_script:
   - appveyor\build.cmd
 
 artifacts:
-  - path: build
-    name: mod_authn_ntlm-%ARCHITECTURE%-%BUILD_CRT%
+  - path: artifacts
+    name: mod_authn_ntlm-%APPVEYOR_REPO_TAG_NAME%-%ARCHITECTURE%-%BUILD_CRT%
     type: zip
