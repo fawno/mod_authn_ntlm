@@ -15,12 +15,11 @@ setlocal enableextensions enabledelayedexpansion
 		set GENERATOR="Visual Studio 15 2017 Win32"
 	)
 
-	mkdir build
-	cd build
+	mkdir %APPVEYOR_BUILD_FOLDER%\build
 
 	set CMAKE_BUILD_TYPE=Release
-	cmd /c appveyor\build-task.cmd
+	cmd /c %APPVEYOR_BUILD_FOLDER%\appveyor\build-task.cmd
 
 	set CMAKE_BUILD_TYPE=Debug
-	cmd /c appveyor\build-task.cmd
+	cmd /c %APPVEYOR_BUILD_FOLDER%\appveyor\build-task.cmd
 endlocal
