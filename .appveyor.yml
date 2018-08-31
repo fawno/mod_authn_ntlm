@@ -10,9 +10,9 @@ environment:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       ARCHITECTURE: x64
       BUILD_CRT: VC15
-#    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-#      ARCHITECTURE: x86
-#      BUILD_CRT: VC15
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      ARCHITECTURE: x86
+      BUILD_CRT: VC14
 
 install:
   - appveyor\install.cmd
@@ -22,5 +22,8 @@ build_script:
 
 artifacts:
   - path: artifacts
-    name: mod_authn_ntlm-%MOD_NTL_VERSION%-%ARCHITECTURE%-%BUILD_CRT%-%APPVEYOR_REPO_TAG_NAME%
+    name: mod_authn_ntlm-%APPVEYOR_REPO_TAG_NAME%-%ARCHITECTURE%-%BUILD_CRT%
+    type: zip
+  - path: build
+    name: mod_authn_ntlm-%APPVEYOR_REPO_TAG_NAME%-%ARCHITECTURE%-%BUILD_CRT%-Build
     type: zip

@@ -23,7 +23,6 @@ setlocal enableextensions enabledelayedexpansion
 		set MOD_NTL_VERSION=!MOD_NTLM_VERSION_MAJOR!.!MOD_NTLM_VERSION_MID!.!MOD_NTLM_VERSION_MINOR!
 		set APPVEYOR_REPO_TAG_NAME=!MOD_NTL_VERSION!-!APPVEYOR_REPO_TAG_NAME!
 
-		appveyor SetVariable -Name MOD_NTL_VERSION -Value !MOD_NTL_VERSION!
 		appveyor SetVariable -Name APPVEYOR_REPO_TAG_NAME -Value !APPVEYOR_REPO_TAG_NAME!
 	)
 
