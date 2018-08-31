@@ -10,9 +10,9 @@ environment:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       ARCHITECTURE: x64
       BUILD_CRT: VC15
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       ARCHITECTURE: x86
-      BUILD_CRT: VC14
+      BUILD_CRT: VC15
 
 install:
   - appveyor\install.cmd
