@@ -1,10 +1,6 @@
 
 version: '{branch}.{build}'
 
-#cache:
-#  - c:\build-cache
-#  - c:\build-cache\sdk
-
 environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
@@ -24,6 +20,6 @@ artifacts:
   - path: artifacts
     name: mod_authn_ntlm-%APPVEYOR_REPO_TAG_NAME%-%ARCHITECTURE%-%BUILD_CRT%
     type: zip
-  - path: build
-    name: mod_authn_ntlm-%APPVEYOR_REPO_TAG_NAME%-%ARCHITECTURE%-%BUILD_CRT%-Build
-    type: zip
+#  - path: build
+#    name: mod_authn_ntlm-%APPVEYOR_REPO_TAG_NAME%-%ARCHITECTURE%-%BUILD_CRT%-Build
+#    type: zip
