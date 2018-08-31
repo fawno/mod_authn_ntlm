@@ -12,7 +12,7 @@ setlocal enableextensions enabledelayedexpansion
 	)
 
 	if "%ARCHITECTURE%"=="x86" (
-		set GENERATOR="Visual Studio 15 2017"
+		set GENERATOR="Visual Studio 14 2015"
 	)
 
 	mkdir %APPVEYOR_BUILD_FOLDER%\build
