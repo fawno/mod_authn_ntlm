@@ -12,8 +12,7 @@ setlocal enableextensions enabledelayedexpansion
 	)
 
 	if "%ARCHITECTURE%"=="x86" (
-		"%VS140COMNTOOLS%\..\..\VC\vcvarsall.bat" x86_amd64
-		set GENERATOR="Visual Studio 15 2017 Win32"
+		set GENERATOR="Visual Studio 15 2017"
 	)
 
 	mkdir %APPVEYOR_BUILD_FOLDER%\build
