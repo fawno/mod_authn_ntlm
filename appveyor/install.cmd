@@ -3,6 +3,7 @@ setlocal enableextensions enabledelayedexpansion
 
 	PowerShell -ExecutionPolicy RemoteSigned %~dp0\Get-Apache.ps1 -Arch %ARCHITECTURE% -DownloadPath %APPVEYOR_BUILD_FOLDER%
 
+	xcopy %APPVEYOR_BUILD_FOLDER%\README.md %APPVEYOR_BUILD_FOLDER%\artifacts\ /y /f
 	xcopy %APPVEYOR_BUILD_FOLDER%\copyright.txt %APPVEYOR_BUILD_FOLDER%\artifacts\ /y /f
 	xcopy %APPVEYOR_BUILD_FOLDER%\conf %APPVEYOR_BUILD_FOLDER%\artifacts\conf\ /y /f
 

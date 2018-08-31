@@ -7,10 +7,6 @@ setlocal enableextensions enabledelayedexpansion
 		exit /b 3
 	)
 
-	mkdir build
-
-	cd build
-
 	if "%ARCHITECTURE%"=="x64" (
 		set GENERATOR="Visual Studio 15 2017 Win64"
 	)
@@ -19,21 +15,12 @@ setlocal enableextensions enabledelayedexpansion
 		set GENERATOR="Visual Studio 15 2017 Win32"
 	)
 
+	mkdir build
+	cd build
+
 	set CMAKE_BUILD_TYPE=Release
+	cmd /c build-task.cmd
 
-	cmake -G %GENERATOR% -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ..
-	cmake --build . --config %CMAKE_BUILD_TYPE%
-
-	if not exist "%APPVEYOR_BUILD_FOLDER%\build\%CMAKE_BUILD_TYPE%\mod_authn_ntlm.dll" exit /b 3
-
-	move "%APPVEYOR_BUILD_FOLDER%\build\%CMAKE_BUILD_TYPE%\mod_authn_ntlm.dll" "%APPVEYOR_BUILD_FOLDER%\build\%CMAKE_BUILD_TYPE%\mod_authn_ntlm.so"
-
-	xcopy %APPVEYOR_BUILD_FOLDER%\copyright.txt %APPVEYOR_BUILD_FOLDER%\mod_authn_ntlm-%MOD_NTL_VERSION%-%ARCHITECTURE%-%BUILD_CRT%-%CMAKE_BUILD_TYPE%\ /y /f
-	xcopy %APPVEYOR_BUILD_FOLDER%\conf %APPVEYOR_BUILD_FOLDER%\mod_authn_ntlm-%MOD_NTL_VERSION%-%ARCHITECTURE%-%BUILD_CRT%-%CMAKE_BUILD_TYPE%\conf\ /y /f
-	xcopy %APPVEYOR_BUILD_FOLDER%\build\%CMAKE_BUILD_TYPE%\* %APPVEYOR_BUILD_FOLDER%\mod_authn_ntlm-%MOD_NTL_VERSION%-%ARCHITECTURE%-%BUILD_CRT%-%CMAKE_BUILD_TYPE%\ /y /f
-	7z a mod_authn_ntlm-%MOD_NTL_VERSION%-%ARCHITECTURE%-%BUILD_CRT%-%CMAKE_BUILD_TYPE%.zip %APPVEYOR_BUILD_FOLDER%\mod_authn_ntlm-%MOD_NTL_VERSION%-%ARCHITECTURE%-%BUILD_CRT%-%CMAKE_BUILD_TYPE%\*
-	appveyor PushArtifact mod_authn_ntlm-%MOD_NTL_VERSION%-%ARCHITECTURE%-%BUILD_CRT%-%CMAKE_BUILD_TYPE%.zip -FileName mod_authn_ntlm-%MOD_NTL_VERSION%-%ARCHITECTURE%-%BUILD_CRT%-%CMAKE_BUILD_TYPE%.zip
-
-	xcopy %APPVEYOR_BUILD_FOLDER%\build\%CMAKE_BUILD_TYPE% artifacts\mod_authn_ntlm-%MOD_NTL_VERSION%-%ARCHITECTURE%-%BUILD_CRT%\%CMAKE_BUILD_TYPE%\ /y /f
-
+	set CMAKE_BUILD_TYPE=Debug
+	cmd /c build-task.cmd
 endlocal
