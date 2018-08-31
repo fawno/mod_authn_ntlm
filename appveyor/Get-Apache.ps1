@@ -16,13 +16,6 @@
 
 	$Arch = $Arch.ToLower()
 
-
-	Import-Module .\Modules\NativeMethods
-	Import-Module .\Modules\Environment
-	Import-Module .\Modules\Others
-	Import-Module .\Modules\NetshFirewall
-	Import-Module .\Modules\Register-ClassesRoot
-
 	$ApacheLounge = "https://www.apachelounge.com/download/"
 
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
