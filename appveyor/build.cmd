@@ -19,8 +19,8 @@ setlocal enableextensions enabledelayedexpansion
 	cd build
 
 	set CMAKE_BUILD_TYPE=Release
-	cmd /c build-task.cmd
+	cmd /c appveyor\build-task.cmd
 
 	set CMAKE_BUILD_TYPE=Debug
-	cmd /c build-task.cmd
+	cmd /c appveyor\build-task.cmd
 endlocal
