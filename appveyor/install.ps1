@@ -3,6 +3,8 @@
 	$BuildFolder = $env:APPVEYOR_BUILD_FOLDER
 	$DownloadPath = "c:\build-cache"
 
+	Get-ChildItem $DownloadPath
+
 	$ApacheLounge = "https://www.apachelounge.com/download/"
 
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -86,3 +88,5 @@
 	Copy-Item "$BuildFolder\CMakeLists.txt" -Destination "$BuildFolder\artifacts\CMakeLists.txt" -ErrorAction Stop
 	Copy-Item "$BuildFolder\conf" -Destination "$BuildFolder\artifacts\conf" -Recurse -ErrorAction Stop
 	Copy-Item "$BuildFolder\src" -Destination "$BuildFolder\artifacts\src" -Recurse -ErrorAction Stop
+
+	Get-ChildItem $DownloadPath

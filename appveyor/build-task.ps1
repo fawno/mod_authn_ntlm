@@ -22,6 +22,10 @@
 
 	$ArtifactName = "mod_authn_ntlm-$($env:APPVEYOR_REPO_TAG_NAME)-$($env:ARCHITECTURE)-$($env:BUILD_CRT)-$BuildType"
 
+	if (!(Test-Path -Path "$BuildFolder\$ArtifactName" )) {
+		New-Item -ItemType Directory -Force -Path "$BuildFolder\$ArtifactName" | Out-Null
+	}
+
 	Copy-Item "$BuildFolder\README.md" -Destination "$BuildFolder\$ArtifactName\README.md" -ErrorAction Stop
 	Copy-Item "$BuildFolder\copyright.txt" -Destination "$BuildFolder\$ArtifactName\copyright.txt" -ErrorAction Stop
 	Copy-Item "$BuildFolder\CMakeLists.txt" -Destination "$BuildFolder\$ArtifactName\CMakeLists.txt" -ErrorAction Stop
