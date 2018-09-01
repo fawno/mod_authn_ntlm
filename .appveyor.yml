@@ -1,6 +1,9 @@
 
 version: '{branch}.{build}'
 
+cache:
+  - c:\build-cache
+
 environment:
   matrix:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
@@ -11,7 +14,8 @@ environment:
       BUILD_CRT: VC15
 
 install:
-  - appveyor\install.cmd
+#  - appveyor\install.cmd
+  - ps: appveyor\install.ps1
 
 build_script:
   - appveyor\build.cmd
