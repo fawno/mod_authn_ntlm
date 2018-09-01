@@ -16,7 +16,7 @@
 	$env:GENERATOR = $Generator
 
 	$env:CMAKE_BUILD_TYPE = "Release"
-	$BuildFolder\appveyor\build-task.ps1
+	Invoke-Expression $BuildFolder\appveyor\build-task.ps1
 
 	$env:CMAKE_BUILD_TYPE = "Debug"
-	$BuildFolder\appveyor\build-task.ps1
+	Invoke-Expression $BuildFolder\appveyor\build-task.ps1
