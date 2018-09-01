@@ -3,8 +3,6 @@
 	$BuildFolder = $env:APPVEYOR_BUILD_FOLDER
 	$DownloadPath = "c:\build-cache"
 
-	Get-ChildItem $DownloadPath
-
 	$ApacheLounge = "https://www.apachelounge.com/download/"
 
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -37,6 +35,8 @@
 	$ApacheFileName = [Uri]::new([Uri]$ApacheDownloadUri).Segments[-1]
 	$ApacheDownloadFile = "$DownloadPath\$ApacheFileName"
 
+	#Get-ChildItem $DownloadPath | Where-Object { $_.Name -ne $ApacheFileName } | ForEach-Object { Remove-Item $_.FullName -Force -ErrorAction SilentlyContinue | Out-Null }
+
 	if (!(Test-Path -Path "$BuildFolder\Apache24\bin\httpd.exe" )) {
 		if (!(Test-Path -Path "$DownloadPath" )) {
 			New-Item -ItemType Directory -Force -Path $DownloadPath | Out-Null
@@ -58,7 +58,6 @@
 			} catch {
 				throw "Unable to extract Apache from ZIP"
 			}
-			Remove-Item $ApacheDownloadFile -Force -ErrorAction SilentlyContinue | Out-Null
 		}
 	}
 
@@ -88,5 +87,3 @@
 	Copy-Item "$BuildFolder\CMakeLists.txt" -Destination "$BuildFolder\artifacts\CMakeLists.txt" -ErrorAction Stop
 	Copy-Item "$BuildFolder\conf" -Destination "$BuildFolder\artifacts\conf" -Recurse -ErrorAction Stop
 	Copy-Item "$BuildFolder\src" -Destination "$BuildFolder\artifacts\src" -Recurse -ErrorAction Stop
-
-	Get-ChildItem $DownloadPath

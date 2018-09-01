@@ -34,4 +34,5 @@
 	Copy-Item "$BuildFolder\build\$BuildType" -Destination "$BuildFolder\$ArtifactName\bin" -Recurse -ErrorAction Stop
 	#7z a $ArtifactName.zip $BuildFolder\$ArtifactName\*
 	#Push-AppveyorArtifact $ArtifactName.zip -FileName $ArtifactName.zip
-	Push-AppveyorArtifact $BuildFolder\$ArtifactName -FileName $ArtifactName.zip -Type zip
+	Compress-Archive -Path $BuildFolder\$ArtifactName -DestinationPath $ArtifactName.zip
+	Push-AppveyorArtifact $ArtifactName.zip -FileName $ArtifactName.zip -Type zip
