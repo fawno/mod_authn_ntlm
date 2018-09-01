@@ -35,7 +35,7 @@
 	$ApacheFileName = [Uri]::new([Uri]$ApacheDownloadUri).Segments[-1]
 	$ApacheDownloadFile = "$DownloadPath\$ApacheFileName"
 
-	if (!(Test-Path -Path "$BuildFolder\bin\httpd.exe" )) {
+	if (!(Test-Path -Path "$BuildFolder\Apache24\bin\httpd.exe" )) {
 		if (!(Test-Path -Path "$DownloadPath" )) {
 			New-Item -ItemType Directory -Force -Path $DownloadPath | Out-Null
 		}
@@ -51,7 +51,7 @@
 
 		if ((Test-Path -Path $ApacheDownloadFile )) {
 			try {
-				Write-Output "Extracting Apache $($Release.Version) ($ApacheFileName) to: $DownloadPath"
+				Write-Output "Extracting Apache $($Release.Version) ($ApacheFileName) to: $BuildFolder"
 				Expand-Archive -LiteralPath $ApacheDownloadFile -DestinationPath $BuildFolder -ErrorAction Stop
 			} catch {
 				throw "Unable to extract Apache from ZIP"
@@ -73,8 +73,8 @@
 		$ModNTLMVersion = "$($ModNTLMVersion.Major).$($ModNTLMVersion.Minor).$($ModNTLMVersion.Build)"
 		$RepoCommit = ($env:APPVEYOR_REPO_COMMIT -replace "^(.{8}).*$", '$1')
 		$RepoTagName = "$ModNTLMVersion-$($env:APPVEYOR_REPO_BRANCH)-$RepoCommit"
-		$env:APPVEYOR_REPO_TAG_NAME = $RepoTagName
-		&appveyor SetVariable -Name APPVEYOR_REPO_TAG_NAME -Value $RepoTagName
+
+		Set-AppveyorBuildVariable -Name APPVEYOR_REPO_TAG_NAME -Value $RepoTagName
 	}
 
 	if (!(Test-Path -Path "$BuildFolder\artifacts" )) {
