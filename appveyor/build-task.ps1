@@ -32,7 +32,5 @@
 	Copy-Item "$BuildFolder\conf" -Destination "$BuildFolder\$ArtifactName\conf" -Recurse -ErrorAction Stop
 	Copy-Item "$BuildFolder\src" -Destination "$BuildFolder\$ArtifactName\src" -Recurse -ErrorAction Stop
 	Copy-Item "$BuildFolder\build\$BuildType" -Destination "$BuildFolder\$ArtifactName\bin" -Recurse -ErrorAction Stop
-	#7z a $ArtifactName.zip $BuildFolder\$ArtifactName\*
-	#Push-AppveyorArtifact $ArtifactName.zip -FileName $ArtifactName.zip
 	Compress-Archive -Path $BuildFolder\$ArtifactName -DestinationPath $BuildFolder\$ArtifactName.zip
-	Push-AppveyorArtifact $ArtifactName.zip -FileName $ArtifactName.zip -Type zip
+	Push-AppveyorArtifact $BuildFolder\$ArtifactName.zip -FileName $ArtifactName.zip -Type zip
